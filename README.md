@@ -1,2 +1,2 @@
 # MajorProject
-Sign langauge Detection 
+Sign language Detection 
