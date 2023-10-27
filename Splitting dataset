@@ -1,0 +1,57 @@
+!git clone https://github.com/nabin25/Major-project
+!pip install  tensorflow
+!nvidia-smi
+import tensorflow as tf
+tf.__version__
+!pip install opencv-python
+!pip install mediapipe
+!pip install tensorflow
+!pip install keras
+!pip install numpy
+!pip install scikit-learn
+#import the libraries
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras import layers
+import os
+import random
+from sklearn.model_selection import train_test_split
+#path for image dataset
+dataset_dir ="Major-project/pre-images/pre-for-ba"
+image_files = [file for file in os.listdir(dataset_dir) if file.endswith(".png")]
+#shuffle the list of images
+print("hand_0014")
+random.shuffle(image_files)
+#split the dataset into training and test
+train_files, test_files = train_test_split(image_files, test_size=0.2)
+train_files, val_files = train_test_split(train_files, test_size=0.25)
+# Print sizes of each set
+print(f"Train set size: {len(train_files)}")
+print(f"Validation set size: {len(val_files)}")
+print(f"Test set size: {len(test_files)}")
+# Print example file names from each set
+print("\nExample files from each set:")
+print("Training set:", train_files[:5])
+print("Validation set:", val_files[:5])
+print("Testing set:", test_files[:5])
+
+import shutil
+from sklearn.model_selection import train_test_split
+# Create directories for train and test sets if they don't exist already
+train_dir = os.path.join(dataset_dir, "train")
+test_dir = os.path.join(dataset_dir, "test")
+os.makedirs(train_dir, exist_ok=True)
+os.makedirs(test_dir, exist_ok=True)
+
+# Move training files to the train directory
+for file in train_files:
+    src_path = os.path.join(dataset_dir, file)
+    dst_path = os.path.join(train_dir, file)
+    shutil.move(src_path, dst_path)
+
+# Move testing files to the test directory
+for file in test_files:
+    src_path = os.path.join(dataset_dir, file)
+    dst_path = os.path.join(test_dir, file)
+    shutil.move(src_path, dst_path)
+
